@@ -1,0 +1,45 @@
+msG:
+{
+	"unid":"01f0",
+	"setid":"01f0",
+	"cmd":"device.reg.new",
+	"value":"",
+	"id":55
+}
+{"unid":"00B4","setid":"0172","cmd":"ACK","value":""}
+cmd:
+	Device:
+		Registering:
+10			device.reg.new - register new device (require unit ID, send set ID back)
+11			device.reg.res - register new device  result (return set Id to requested device)
+12			device.reg.renew - device come online 
+		Values:
+20			device.val.input - receive new value from device
+21			device.val.set 	 - set new value to device
+22			device.val.set.error - set new value to device
+			device.val.set.scheduled - set new value to device
+1		device.heartbeat 	 - we know that device is alive
+2		device.offline 	 - we know that device is alive
+		
+	Common:
+0		ACK	- aknowledge of receive
+
+
+CAN:
+01B0 0000: 0,0,0,0,0,0,0 	UN->HUB request set id
+01B0 0000: 01,B0,0,0,0,0,0 	UN<-HUB result set id
+//
+cmd:
+0[_F]
+0 - ACK
+1 - HeartBeat
+//2 - Request network info
+3 - Value set
+4 - Value input
+5 - Register request
+6 - Register result
+0[F_] - frame count
+1 - if frame count more 1, number of frame, else - first data
+01B0 0171: 31,B0,0,0,0,0,0 	(Value set, one value frame. Value - B0)
+01B0 0171: 45,03,25,0,0,0,0 (Value input, 5 value frames, this is 3. Value - 25)
+
